@@ -17,11 +17,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.name == "PlayerBall") // Better use tag except name 
         {
-            MyEventSystem.I.FailLevel(_levelManager.currentLevel);
+            MyEventSystem.I.FailLevel(_levelManager.currentLevelIndex + 1);
             _levelManager.onLevelFail?.Invoke();
         }
     }
-    
-    // public int currentLevel = 1;
-    // public string sceneToLoad = "Level1";
 }

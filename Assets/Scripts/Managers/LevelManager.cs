@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     [Header("LevelsData"), Space] 
     [SerializeField] private SO_LevelData levelData; // Read levels from level scriptableobject
-    public int currentLevel=0; // Caching current level and using it for save and load later 
+    public int currentLevelIndex = 0; // Caching current level and using it for save and load later 
 
     [Header("Actions")] // Observe these actions for avoid dependencies
     public Action onLevelSuccess;
@@ -49,11 +49,13 @@ public class LevelManager : MonoBehaviour
     
     private void LoadNextLevel()
     {
-        currentLevel++;
-        SceneManager.LoadScene(levelData.levelScenes[currentLevel].name);
+        currentLevelIndex++;
+        if (currentLevelIndex >= levelData.levelScenes.Length) // Check For if player played all of our game levels and restart game
+            currentLevelIndex = 0;
+        SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex].name);
     }
 
-    public void LoadCurrentLevel() => SceneManager.LoadScene(levelData.levelScenes[currentLevel].name);
+    public void LoadCurrentLevel() => SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex].name);
 
     #endregion
 

@@ -14,8 +14,6 @@ public class BallRoller : MonoBehaviour
     [Header("Configs"), Space]
     //Move
     [SerializeField] private float torqueAmount;
-    //Level
-    [SerializeField] private int level = 1;
     //Input
     private Vector3 cameraOffset = new();
     private Vector2 inputVector = Vector2.zero;
@@ -24,7 +22,7 @@ public class BallRoller : MonoBehaviour
 
     private void Awake()
     {
-        MyEventSystem.I.StartLevel(level);
+        MyEventSystem.I.StartLevel(LevelManager.instance.currentLevelIndex + 1);
 
         Init();
     }
@@ -93,37 +91,4 @@ public class BallRoller : MonoBehaviour
     private void CameraFollow() => _camera.transform.position = _ballGameObject.transform.position - cameraOffset;
 
     #endregion
-
-    // public int level = 1;
-    // public float torqueAmount;
-    // private Vector3 cameraOffset;
-    //
-    // private bool isPressing = false;
-    // private Vector2 originalPressPoint = Vector2.zero;
-    
-    // private void Update()
-    // {
-    //     var ballRigidbody = GameObject.Find("PlayerBall").GetComponent<Rigidbody>();
-    //
-    //     if (Input.GetMouseButton(0))
-    //     {
-    //         if (!isPressing)
-    //         {
-    //             originalPressPoint = Input.mousePosition;
-    //             isPressing = true;
-    //         }
-    //         else
-    //         {
-    //             Vector2 diff = (originalPressPoint - new Vector2(Input.mousePosition.x, Input.mousePosition.y)).normalized;
-    //             
-    //             ballRigidbody.AddTorque((Vector3.forward * diff.x + Vector3.right * -diff.y) * torqueAmount, ForceMode.VelocityChange);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         isPressing = false;
-    //     }
-    //
-    //     Camera.main.transform.position = ballRigidbody.transform.position - cameraOffset; // dont try this at home! :)
-    // }
 }
