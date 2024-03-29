@@ -8,6 +8,6 @@ public class LoadImmediately : MonoBehaviour
 {
     private void Awake()
     {
-        SceneManager.LoadScene("Level1");
+        LevelManager.instance.LoadCurrentLevel();
     }
 }
