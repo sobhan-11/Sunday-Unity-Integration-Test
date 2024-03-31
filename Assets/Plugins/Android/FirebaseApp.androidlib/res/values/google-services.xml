@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
-  <string name="gcm_defaultSenderId" translatable="false">619650198687</string>
-  <string name="google_storage_bucket" translatable="false">sunday-test-8f390.appspot.com</string>
-  <string name="project_id" translatable="false">sunday-test-8f390</string>
-  <string name="google_api_key" translatable="false">AIzaSyAjf5RwGKz0EyjFY-EXX2X-SqiIkrqWcdg</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAjf5RwGKz0EyjFY-EXX2X-SqiIkrqWcdg</string>
-  <string name="google_app_id" translatable="false">1:619650198687:android:7dd732115e564c4f3246aa</string>
+  <string name="gcm_defaultSenderId" translatable="false">403294191782</string>
+  <string name="google_storage_bucket" translatable="false">test-cc9cb.appspot.com</string>
+  <string name="project_id" translatable="false">test-cc9cb</string>
+  <string name="google_api_key" translatable="false">AIzaSyD_zY2yKwJORc1XNLNttdh53PkQQDyXZMw</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD_zY2yKwJORc1XNLNttdh53PkQQDyXZMw</string>
+  <string name="google_app_id" translatable="false">1:403294191782:android:cd9d4c9067168f5a4eb467</string>
 </resources>

@@ -24,7 +24,9 @@ public class MyEventSystem : MonoBehaviour
 
     public void StartLevel(int level)
     {
+        // Game Analytics
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, level.ToString());
+        // Firebase Analytics
         Firebase.Analytics.FirebaseAnalytics
             .LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelStart,
                 new Parameter(FirebaseAnalytics.ParameterLevel, level));
@@ -32,7 +34,9 @@ public class MyEventSystem : MonoBehaviour
     
     public void FailLevel(int level)
     {
+        // Game Analytics
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, level.ToString());
+        // Firebase Analytics
         Firebase.Analytics.FirebaseAnalytics
             .LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelEnd,
                 new Parameter(FirebaseAnalytics.ParameterLevel, level));
@@ -40,7 +44,9 @@ public class MyEventSystem : MonoBehaviour
     
     public void CompleteLevel(int level)
     {
+        // Game Analytics
         GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, level.ToString());
+        // Firebase Analytics
         Firebase.Analytics.FirebaseAnalytics
             .LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLevelUp,
                 new Parameter(FirebaseAnalytics.ParameterLevel, level));
