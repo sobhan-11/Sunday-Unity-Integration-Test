@@ -46,6 +46,9 @@ namespace GameAnalyticsSDK
 
         private static bool _hasInitializeBeenCalled;
 
+        public static event EventHandler<bool> onInitialize;
+        public static bool Initialized { get{ return _hasInitializeBeenCalled; } }
+
         #region unity derived methods
 
         #if UNITY_EDITOR
@@ -242,6 +245,12 @@ namespace GameAnalyticsSDK
             {
                 SetEnabledManualSessionHandling(true);
             }
+
+            EnableSDKInitEvent(SettingsGA.EnableSDKInitEvent);
+            EnableFpsHistogram(SettingsGA.EnableFPSHistogram);
+            EnableMemoryHistogram(SettingsGA.EnableMemoryHistogram);
+            EnableHealthHardwareInfo(SettingsGA.EnableHardwareTracking);
+
         }
 
         public static void Initialize ()
@@ -253,11 +262,14 @@ namespace GameAnalyticsSDK
             {
                 GA_Wrapper.Initialize (SettingsGA.GetGameKey (platformIndex), SettingsGA.GetSecretKey (platformIndex));
                 GameAnalytics._hasInitializeBeenCalled = true;
+
+                onInitialize?.Invoke(typeof(GameAnalytics), true);
             }
             else
             {
                 GameAnalytics._hasInitializeBeenCalled = true;
                 Debug.LogWarning("GameAnalytics: Unsupported platform (events will not be sent in editor; or missing platform in settings): " + Application.platform);
+                onInitialize?.Invoke(typeof(GameAnalytics), false);
             }
         }
 
@@ -870,6 +882,32 @@ namespace GameAnalyticsSDK
         }
 
         /// <summary>
+        /// gets the current user id
+        /// </summary>
+        public static String GetUserId()
+        {
+            return GA_Wrapper.getUserId();
+        }
+
+        /// <summary>
+        /// gets the current external user id (if any)
+        /// </summary>
+        public static String GetExternalUserId()
+        {
+            return GA_Wrapper.GetExternalUserId();
+        }
+
+        /// <summary>
+        /// Sets an optional external user id. Will be attached to every event. Has no impact on the GA process
+        /// Can be set or changed at any time
+        /// </summary>
+        /// <param name="externalUserId">External User identifier.</param>
+        public static void SetExternalUserId(string externalUserId)
+        {
+            GA_Wrapper.SetExternalUserId(externalUserId);
+        }
+
+        /// <summary>
         /// Sets the enabled manual session handling.
         /// </summary>
         /// <param name="enabled">If set to <c>true</c> enabled.</param>
@@ -885,6 +923,16 @@ namespace GameAnalyticsSDK
         public static void SetEnabledEventSubmission(bool enabled)
         {
             GA_Wrapper.SetEnabledEventSubmission(enabled);
+        }
+
+        /// <summary>
+        /// Sets the enabled event submission.
+        /// </summary>
+        /// <param name="enabled">If set to <c>true</c> enabled.</param>
+        /// <param name="doCache">If set to <c>true</c> events will be cached locally even if submission is disabled.</param>
+        public static void SetEnabledEventSubmission(bool enabled, bool doCache)
+        {
+            GA_Wrapper.SetEnabledEventSubmission(enabled, doCache);
         }
 
         /// <summary>
@@ -978,6 +1026,11 @@ namespace GameAnalyticsSDK
             return GA_Wrapper.GetRemoteConfigsContentAsString();
         }
 
+        public static string GetRemoteConfigsContentAsJSON()
+        {
+            return GA_Wrapper.GetRemoteConfigsContentAsJSON();
+        }
+
         // ----------------------- A/B TESTING ---------------------- //
         public static string GetABTestingId()
         {
@@ -1009,6 +1062,51 @@ namespace GameAnalyticsSDK
             return GA_Wrapper.StopTimer(key);
         }
 
+        // ----------------------- HEALTH EVENT --------------------------------------------//
+
+        /// <summary>
+        /// enable the SDK init event to automatically track the boot time (time from application launch to the GameAnalytics SDK initialization).
+        /// (Android & iOS ONLY)
+        /// </summary>
+        /// <param name="flag">should be enabled or not</param>
+        public static void EnableSDKInitEvent(bool flag)
+        {
+            GA_Setup.EnableSDKInitEvent(flag);
+        }
+
+        /// <summary>
+        ///  Enable FPS sampling across the entire session to ultimately send an FPS histogram via the Session Performance Event.
+        ///  (Android & iOS ONLY)
+        /// </summary>
+        /// <param name="flag">should be enabled or not</param>
+        public static void EnableFpsHistogram(bool flag)
+        {
+            GA_Setup.EnableFpsHistogram(flag);
+        }
+
+        /// <summary>
+        ///  Enable memory usage sampling across the entire session to ultimately send a memory usage histogram via the Session Performance Event.
+        /// (Android & iOS ONLY)
+        /// </summary>
+        /// <param name="flag">should be enabled or not</param>
+        public static void EnableMemoryHistogram(bool flag)
+        {
+            GA_Setup.EnableMemoryHistogram(flag);
+        }
+
+        /// <summary>
+        /// (EXPERIMENTAL) enable discovery of device hardware information like,
+        /// cpu model, number of cpu cores, GPU model, chipset/hardware (if available).
+        /// these data points are added as properties to existing health
+        /// events (error, SDK init, session performance) if those are enabled.
+        //  (Android & iOS ONLY)
+        /// </summary>
+        /// <param name="flag">should be enabled or not</param>
+        public static void EnableHealthHardwareInfo(bool flag)
+        {
+            GA_Setup.EnableHealthHardwareInfo(flag);
+        }
+
         // ----------------------- IOS 14+ APP TRACKING TRANSPARENCY ---------------------- //
         public static void RequestTrackingAuthorization(IGameAnalyticsATTListener listener)
         {
@@ -1016,6 +1114,15 @@ namespace GameAnalyticsSDK
             GameAnalyticsATTClient.Instance.RequestTrackingAuthorization(listener);
 #endif
         }
+
+        public static void EnableAdvertisingIdTracking(bool flag)
+        {
+#if UNITY_ANDROID && (!UNITY_EDITOR)
+            GA_Wrapper.enableGAIDTracking(flag);
+#endif
+        }
+
+        
 
         private static string GetUnityVersion()
         {

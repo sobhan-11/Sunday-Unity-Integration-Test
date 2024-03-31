@@ -286,6 +286,23 @@ typedef enum GAAdError : NSInteger
  */
 + (void)configureUserId:(NSString *)userId;
 
+/*!
+ @method
+
+ @abstract Set a custom external unique user_id identifying the user. 
+ Has no impact on any GA process, but will be added to every event
+ Can be changed at any point
+
+ @discussion <i>Example usage:</i>
+ <pre><code>
+ [GameAnalytics configureExternalUserId:@"24566"];
+ </code></pre>
+
+ @param userId
+ (String max length=64)
+ */
++ (void)configureExternalUserId:(NSString *)userId;
+
 /* @IF WRAPPER */
 
 /*
@@ -1561,6 +1578,17 @@ typedef enum GAAdError : NSInteger
 /*!
  @method
 
+ @abstract Get remote configs configurations as a valid json
+
+ @availability Available since (TBD)
+
+ @attribute For internal use.
+ */
++ (NSString *)getRemoteConfigsContentAsJSON;
+
+/*!
+ @method
+
  @abstract Use this to set the delegate for the Remote Configs to retreive information about the status of loading configurations
 
  @availability Available since (TBD)
@@ -1577,6 +1605,31 @@ typedef enum GAAdError : NSInteger
  @attribute Note! This method should not be called before initialize method has been triggered
  */
 + (BOOL)isRemoteConfigsReady;
+
+/*!
+ @method
+
+ @abstract Get the user id
+
+ @availability Available since (TBD)
+ */
++ (NSString *)getUserId;
+
+/*!
+ @method
+
+ @abstract Get the external user id
+
+ @availability Available since (TBD)
+ */
++ (NSString *)getExternalUserId;
+
+/*!
+ @method
+
+ @abstract flag to use a randomized id instead of idfv
+ */
++ (void)useRandomizedId:(BOOL) flag;
 
 /*!
  @method
@@ -1682,6 +1735,21 @@ typedef enum GAAdError : NSInteger
 /*!
  @method
 
+ @abstract Enable/disable event submission.
+ When enabled this will allow events to be sent.
+
+ @param flag
+ Enable or disable event submission.
+
+ @param doLocalEventCaching
+ do cache events locally even if the submission is disabled
+
+ */
++ (void)setEnabledEventSubmission:(BOOL)flag doLocalEventCaching:(BOOL)doCache;
+
+/*!
+ @method
+
  @abstract Start a new session.
  - if sdk is initialized
  - if manual session handling is enabled
@@ -1760,6 +1828,14 @@ typedef enum GAAdError : NSInteger
  Custom event fields to use as global ones
  */
 + (void)setGlobalCustomEventFields:(NSDictionary *)customFields;
+
++ (void) enableSDKInitEvent:(BOOL)flag;
+
++ (void) enableFpsHistogram:(BOOL)flag;
+
++ (void) enableMemoryHistogram:(BOOL)flag;
+
++ (void) enableHealthHardwareInfo:(BOOL)flag;
 
 /*!
  @method

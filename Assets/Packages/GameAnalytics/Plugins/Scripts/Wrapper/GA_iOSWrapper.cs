@@ -36,6 +36,9 @@ namespace GameAnalyticsSDK.Wrapper
         private static extern void configureUserId(string userId);
 
         [DllImport ("__Internal")]
+        private static extern void configureExternalUserId(string userId);
+
+        [DllImport ("__Internal")]
         private static extern void configureAutoDetectAppVersion(bool flag);
 
         [DllImport ("__Internal")]
@@ -102,6 +105,9 @@ namespace GameAnalyticsSDK.Wrapper
         private static extern void setEventSubmission(bool enabled);
 
         [DllImport ("__Internal")]
+        private static extern void setEventSubmission(bool enabled, bool doCache);
+
+        [DllImport ("__Internal")]
         private static extern void gameAnalyticsStartSession();
 
         [DllImport ("__Internal")]
@@ -117,6 +123,10 @@ namespace GameAnalyticsSDK.Wrapper
         [DllImport ("__Internal")]
         [return: MarshalAs(UnmanagedType.LPStr)]
         private static extern string getRemoteConfigsContentAsString();
+
+        [DllImport ("__Internal")]
+        [return: MarshalAs(UnmanagedType.LPStr)]
+        private static extern string getRemoteConfigsContentAsJSON();
 
         [DllImport ("__Internal")]
         [return: MarshalAs(UnmanagedType.LPStr)]
@@ -137,6 +147,29 @@ namespace GameAnalyticsSDK.Wrapper
 
         [DllImport ("__Internal")]
         private static extern long stopTimer(string key);
+
+        [DllImport ("__Internal")]
+        [return: MarshalAs(UnmanagedType.LPStr)]
+        public static extern string getUserId();
+
+        [DllImport ("__Internal")]
+        [return: MarshalAs(UnmanagedType.LPStr)]
+        public static extern string getExternalUserId();
+
+        [DllImport ("__Internal")]
+        public static extern void useRandomizedId(bool flag);
+
+        [DllImport ("__Internal")]
+        public static extern void enableSDKInitEvent(bool flag);
+
+        [DllImport ("__Internal")]
+        public static extern void enableFpsHistogram(bool flag);
+
+        [DllImport ("__Internal")]
+        public static extern void enableMemoryHistogram(bool flag);
+
+        [DllImport ("__Internal")]
+        public static extern void enableHealthHardwareInfo(bool flag);
 
         private static void initialize(string gamekey, string gamesecret)
         {

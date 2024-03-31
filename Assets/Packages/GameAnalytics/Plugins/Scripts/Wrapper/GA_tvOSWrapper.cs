@@ -90,6 +90,9 @@ namespace GameAnalyticsSDK.Wrapper
         private static extern void setEventSubmission(bool enabled);
 
         [DllImport ("__Internal")]
+        private static extern void setEventSubmissionWithCaching(bool enabled, bool doCacheLocally);
+
+        [DllImport ("__Internal")]
         private static extern void gameAnalyticsStartSession();
 
         [DllImport ("__Internal")]
@@ -113,6 +116,10 @@ namespace GameAnalyticsSDK.Wrapper
         [DllImport ("__Internal")]
         [return: MarshalAs(UnmanagedType.LPStr)]
         private static extern string getABTestingVariantId();
+
+        [DllImport ("__Internal")]
+        [return: MarshalAs(UnmanagedType.LPStr)]
+        public static extern string getUserId();
 
         private static void initialize(string gamekey, string gamesecret)
         {

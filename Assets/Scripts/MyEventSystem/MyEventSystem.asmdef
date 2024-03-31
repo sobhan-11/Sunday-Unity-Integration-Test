@@ -1,7 +1,9 @@
 {
     "name": "MyEventSystem",
     "rootNamespace": "MyEventSystem",
-    "references": [],
+    "references": [
+        "GUID:2826124e6f50b3f4c8e654f53103bd13"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

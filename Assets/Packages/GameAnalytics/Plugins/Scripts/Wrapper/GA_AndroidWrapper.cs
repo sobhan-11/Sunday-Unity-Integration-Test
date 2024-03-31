@@ -209,6 +209,11 @@ namespace GameAnalyticsSDK.Wrapper
             GA.CallStatic("setEnabledEventSubmission", enabled);
         }
 
+        private static void setEventSubmission(bool enabled, bool doCacheLocally)
+        {
+            GA.CallStatic("setEnabledEventSubmission", enabled, doCacheLocally);
+        }
+
         private static void gameAnalyticsStartSession()
         {
             GA.CallStatic("startSession");
@@ -244,6 +249,16 @@ namespace GameAnalyticsSDK.Wrapper
             return GA.CallStatic<string>("getABTestingVariantId");
         }
 
+        private static string getExternalUserId()
+        {
+            return GA.CallStatic<string>("getExternalUserId");
+        }
+
+        private static void configureExternalUserId(string externalUserId)
+        {
+            GA.CallStatic("configureExternalUserId", externalUserId);
+        }
+
         private static void startTimer(string key)
         {
             GA.CallStatic("startTimer", key);
@@ -262,6 +277,36 @@ namespace GameAnalyticsSDK.Wrapper
         private static long stopTimer(string key)
         {
             return GA.CallStatic<long>("stopTimer", key);
+        }
+
+        public static String getUserId()
+        {
+            return GA.CallStatic<string>("getUserId");
+        }
+
+        public static void enableGAIDTracking(bool flag)
+        {
+            GA.CallStatic("setGAIDTracking", flag);
+        }
+
+        public static void enableSDKInitEvent(bool flag)
+        {
+            GA.CallStatic("enableSDKInitEvent", flag);
+        }
+
+        public static void enableFpsHistogram(bool flag)
+        {
+            GA.CallStatic("enableFpsHistogram", flag);
+        }
+
+        public static void enableMemoryHistogram(bool flag)
+        {
+            GA.CallStatic("enableMemoryHistogram", flag);
+        }
+
+        public static void enableHealthHardwareInfo(bool flag)
+        {
+            GA.CallStatic("enableHealthHardwareInfo", flag);
         }
 #endif
     }

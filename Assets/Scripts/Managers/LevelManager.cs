@@ -52,10 +52,10 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex++;
         if (currentLevelIndex >= levelData.levelScenes.Length) // Check For if player played all of our game levels and restart game
             currentLevelIndex = 0;
-        SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex].name);
+        SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex]);
     }
 
-    public void LoadCurrentLevel() => SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex].name);
+    public void LoadCurrentLevel() => SceneManager.LoadScene(levelData.levelScenes[currentLevelIndex]);
 
     #endregion
 
