@@ -15,7 +15,7 @@ public class FinishTarget : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "PlayerBall") // Better use tag except name 
+        if (other.gameObject.name == "PlayerBall") // Better use tag for name 
         {
             MyEventSystem.I.CompleteLevel(_levelManager.currentLevelIndex + 1); 
             _levelManager.onLevelSuccess?.Invoke();

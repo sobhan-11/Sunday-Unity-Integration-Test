@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "PlayerBall") // Better use tag except name 
+        if (collision.gameObject.name == "PlayerBall") // Better use tag for name 
         {
             MyEventSystem.I.FailLevel(_levelManager.currentLevelIndex + 1);
             _levelManager.onLevelFail?.Invoke();

@@ -51,7 +51,7 @@ public class BallRoller : MonoBehaviour
 
     private void Init()
     {
-        // We should catch components for improve performance
+        // We should cache components for improve performance
         _ballGameObject = GameObject.Find("PlayerBall"); // it's better to create a const string for ball name!
         _ballRigidbody = _ballGameObject.GetComponent<Rigidbody>();
         _camera = Camera.main; // Don't use camera.main in every frame , its a heavy call

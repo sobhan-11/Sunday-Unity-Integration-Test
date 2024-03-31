@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619650198687",
+    "project_id": "sunday-test-8f390",
+    "storage_bucket": "sunday-test-8f390.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619650198687:android:7dd732115e564c4f3246aa",
+        "android_client_info": {
+          "package_name": "com.firebaseanalytics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjf5RwGKz0EyjFY-EXX2X-SqiIkrqWcdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
