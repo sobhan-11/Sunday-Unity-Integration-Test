@@ -6,7 +6,7 @@
             url "https://maven.google.com"
         }
         maven {
-            url (unityProjectPath + "/Assets/Firebase/m2repository") // Assets/Packages/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Packages/Firebase/Editor/AppDependencies.xml:22
+            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22
         }
         mavenLocal()
         mavenCentral()
@@ -19,13 +19,11 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
-    implementation 'com.google.android.gms:play-services-appset:16.0.2' // Assets/Packages/GameAnalytics/Editor/Android/Dependencies.xml:4
-    implementation 'com.google.android.gms:play-services-base:18.3.0' // Assets/Packages/Firebase/Editor/AppDependencies.xml:17
-    implementation 'com.google.android.instantapps:instantapps:1.1.0' // Assets/Packages/GameAnalytics/Editor/Android/Dependencies.xml:3
-    implementation 'com.google.firebase:firebase-analytics:21.5.1' // Assets/Packages/Firebase/Editor/AppDependencies.xml:15
-    implementation 'com.google.firebase:firebase-analytics-unity:11.8.1' // Assets/Packages/Firebase/Editor/AnalyticsDependencies.xml:18
-    implementation 'com.google.firebase:firebase-app-unity:11.8.1' // Assets/Packages/Firebase/Editor/AppDependencies.xml:22
-    implementation 'com.google.firebase:firebase-common:20.4.2' // Assets/Packages/Firebase/Editor/AppDependencies.xml:13
+    implementation 'com.google.android.gms:play-services-base:18.2.0' // Assets/Firebase/Editor/AppDependencies.xml:17
+    implementation 'com.google.firebase:firebase-analytics:21.3.0' // Assets/Firebase/Editor/AppDependencies.xml:15
+    implementation 'com.google.firebase:firebase-analytics-unity:11.1.0' // Assets/Firebase/Editor/AnalyticsDependencies.xml:18
+    implementation 'com.google.firebase:firebase-app-unity:11.1.0' // Assets/Firebase/Editor/AppDependencies.xml:22
+    implementation 'com.google.firebase:firebase-common:20.3.2' // Assets/Firebase/Editor/AppDependencies.xml:13
 // Android Resolver Dependencies End
 **DEPS**}
 

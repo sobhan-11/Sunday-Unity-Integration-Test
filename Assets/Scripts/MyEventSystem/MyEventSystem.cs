@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Firebase.Analytics;
 using UnityEngine;
-using GameAnalyticsSDK;  /* We need to create an assembly definition reference in game analytics folder for it */
+using GameAnalyticsSDK;
                         
 
 public class MyEventSystem : MonoBehaviour

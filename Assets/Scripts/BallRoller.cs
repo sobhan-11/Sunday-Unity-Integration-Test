@@ -13,7 +13,7 @@ public class BallRoller : MonoBehaviour
 
     [Header("Configs"), Space]
     //Move
-    [SerializeField] private float torqueAmount;
+    [SerializeField] private float speed;
     //Input
     private Vector3 cameraOffset = new();
     private Vector2 inputVector = Vector2.zero;
@@ -65,23 +65,62 @@ public class BallRoller : MonoBehaviour
 
     private void GatherInput()
     {
-        if (Input.GetMouseButton(0))
-        {
-            if (isPressing)
-            {
-                inputVector = (originalPressPoint - new Vector2(Input.mousePosition.x, Input.mousePosition.y)).normalized;
-                return;
-            }
+#if UNITY_EDITOR
+
+        #region MouseInput
+
+        if (Input.GetMouseButtonDown(0)) 
+        { 
+            isPressing = true; 
             originalPressPoint = Input.mousePosition;
-            isPressing = true;
         }
+        else if (Input.GetMouseButton(0)) 
+        { 
+            Vector2 endPoint = Input.mousePosition; 
+            inputVector = (endPoint - originalPressPoint).normalized;
+        } 
+        if (Input.GetMouseButtonUp(0)) 
+            isPressing = false;
+        
+        #endregion
+           
+#endif
+
+#if UNITY_ANDROID
+               
+        #region TouchInput
+        
+        if (Input.touchCount != 1) 
+        { 
+            isPressing = false; 
+            return;
+        }
+        var touch = Input.touches[0];
+        switch (touch.phase)
+        { 
+            case TouchPhase.Began:
+                isPressing = true; 
+                originalPressPoint = touch.position; 
+                break;
+            case TouchPhase.Moved: 
+            case TouchPhase.Ended: 
+            case TouchPhase.Canceled: 
+                Vector2 endPoint = touch.position; 
+                inputVector = (endPoint - originalPressPoint).normalized; 
+                break;
+        }
+        
+        #endregion
+#endif
+        
     }
 
     private void ApplyMove()
     {
-        // Multiply torque with fixed delta time to independent movement and input from frame rate 
-        var torque = (Vector3.forward * inputVector.x + Vector3.right * -inputVector.y) * (torqueAmount * Time.fixedDeltaTime);
-        _ballRigidbody.AddTorque(torque, ForceMode.VelocityChange);
+        if(isPressing) return;
+        // Multiply speed with fixed delta time to independent movement and input from frame rate 
+        var velocity = (Vector3.forward * inputVector.y + Vector3.right * inputVector.x) * (speed * Time.fixedDeltaTime);
+        _ballRigidbody.velocity = velocity;
     }
 
     #endregion

@@ -350,8 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c386a256c5944e1933ac90b374cc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torqueAmount: 100
-  level: 2
+  speed: 200
 --- !u!4 &601058362
 Transform:
   m_ObjectHideFlags: 0
@@ -400,8 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163672d66237548ecbcfc86a7be1eda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  sceneToLoad: Level2
 --- !u!54 &875500600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -622,8 +619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63675124c4d44488b563d6f942bfe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  sceneToLoad: Level1
 --- !u!135 &1338177958
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -735,8 +730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163672d66237548ecbcfc86a7be1eda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  sceneToLoad: Level2
 --- !u!54 &1543230650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -864,8 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163672d66237548ecbcfc86a7be1eda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  sceneToLoad: Level2
 --- !u!54 &1780708198
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1090,8 +1081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163672d66237548ecbcfc86a7be1eda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
-  sceneToLoad: Level2
 --- !u!54 &1893761142
 Rigidbody:
   m_ObjectHideFlags: 0
