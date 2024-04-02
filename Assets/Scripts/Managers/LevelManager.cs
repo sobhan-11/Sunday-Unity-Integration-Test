@@ -31,6 +31,8 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        // Use this code for remove frame rate cap on strong devices and have better fps in them instead of limited 60! 
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     private void OnEnable()
