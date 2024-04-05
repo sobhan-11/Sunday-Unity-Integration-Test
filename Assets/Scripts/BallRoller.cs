@@ -117,7 +117,6 @@ public class BallRoller : MonoBehaviour
 
     private void ApplyMove()
     {
-        if(isPressing) return;
         // Multiply speed with fixed delta time to independent movement and input from frame rate 
         var velocity = (Vector3.forward * inputVector.y + Vector3.right * inputVector.x) * (speed * Time.fixedDeltaTime);
         _ballRigidbody.velocity = velocity;
