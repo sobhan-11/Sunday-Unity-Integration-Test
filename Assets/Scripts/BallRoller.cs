@@ -12,8 +12,7 @@ public class BallRoller : MonoBehaviour
     private GameObject _ballGameObject;
 
     [Header("Configs"), Space]
-    //Move
-    [SerializeField] private float speed;
+    private float torqueAmount;
     //Input
     private Vector3 cameraOffset = new();
     private Vector2 inputVector = Vector2.zero;
@@ -30,6 +29,7 @@ public class BallRoller : MonoBehaviour
     private void Start()
     {
         cameraOffset = _ballGameObject.transform.position - Camera.main.transform.position;
+        torqueAmount = 10f;
     }
 
     private void Update()
@@ -65,61 +65,28 @@ public class BallRoller : MonoBehaviour
 
     private void GatherInput()
     {
-#if UNITY_EDITOR
-
-        #region MouseInput
-
-        if (Input.GetMouseButtonDown(0)) 
-        { 
-            isPressing = true; 
-            originalPressPoint = Input.mousePosition;
+        if (Input.GetMouseButton(0))
+        {
+            if (!isPressing)
+            {
+                originalPressPoint = Input.mousePosition;
+                isPressing = true;
+            }
+            else
+            {
+                inputVector = (originalPressPoint - new Vector2(Input.mousePosition.x, Input.mousePosition.y)).normalized;
+            }
         }
-        else if (Input.GetMouseButton(0)) 
-        { 
-            Vector2 endPoint = Input.mousePosition; 
-            inputVector = (endPoint - originalPressPoint).normalized;
-        } 
-        if (Input.GetMouseButtonUp(0)) 
+        else
+        {
             isPressing = false;
-        
-        #endregion
-           
-#endif
-
-#if UNITY_ANDROID
-               
-        #region TouchInput
-        
-        if (Input.touchCount != 1) 
-        { 
-            isPressing = false; 
-            return;
         }
-        var touch = Input.touches[0];
-        switch (touch.phase)
-        { 
-            case TouchPhase.Began:
-                isPressing = true; 
-                originalPressPoint = touch.position; 
-                break;
-            case TouchPhase.Moved: 
-            case TouchPhase.Ended: 
-            case TouchPhase.Canceled: 
-                Vector2 endPoint = touch.position; 
-                inputVector = (endPoint - originalPressPoint).normalized; 
-                break;
-        }
-        
-        #endregion
-#endif
-        
     }
 
     private void ApplyMove()
     {
         // Multiply speed with fixed delta time to independent movement and input from frame rate 
-        var velocity = (Vector3.forward * inputVector.y + Vector3.right * inputVector.x) * (speed * Time.fixedDeltaTime);
-        _ballRigidbody.velocity = velocity;
+        _ballRigidbody.AddTorque((Vector3.forward * inputVector.x + Vector3.right * -inputVector.y) * torqueAmount, ForceMode.VelocityChange);
     }
 
     #endregion
