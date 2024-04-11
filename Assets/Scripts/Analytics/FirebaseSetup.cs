@@ -9,7 +9,7 @@ namespace Analytics
     public class FirebaseSetup : MonoBehaviour
     {
         private FirebaseApp _app;
-
+        
         private void Start()
         {
             Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
@@ -27,13 +27,13 @@ namespace Analytics
                 }
             });
         }
-
+        
         private void InitializeFirebase()
         {
             // Handle initialization of the necessary firebase modules:
             Debug.Log("Enabling data collection.");
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-
+        
             Debug.Log("Set user properties.");
             // Set the user's sign up method.
             FirebaseAnalytics.SetUserProperty(

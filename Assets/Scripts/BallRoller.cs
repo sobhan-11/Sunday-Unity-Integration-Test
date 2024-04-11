@@ -21,8 +21,9 @@ public class BallRoller : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID
         MyEventSystem.I.StartLevel(LevelManager.instance.currentLevelIndex + 1);
-
+#endif
         Init();
     }
 

@@ -2,9 +2,12 @@
     "name": "MyEventSystem",
     "rootNamespace": "MyEventSystem",
     "references": [
-        "GUID:2826124e6f50b3f4c8e654f53103bd13"
+        "GUID:3380250f65f304e44afb20260b4f939f"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Android",
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
